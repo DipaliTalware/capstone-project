@@ -5,7 +5,8 @@ function App() {
   return (
     <>
 <form>
-    <input className= "name" type= "text" placeholder="name"></input>
+    <input className= "name" type= "text" placeholder="firstname"></input>
+    <input className= "name" type= "text" placeholder="lastname"></input>
 </form>
     </>
   )
