@@ -4,31 +4,29 @@ import com.example.backend.dto.QuestionDTO;
 import com.example.backend.model.Question;
 import com.example.backend.repository.QuestionRepository;
 import com.example.backend.services.QuestionService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class QuestionServiceTest {
 
     @Mock
-    private QuestionRepository questionRepository;
+    private QuestionRepository questionRepository = mock(QuestionRepository.class);
 
     @InjectMocks
     private QuestionService questionService;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     void getAllQuestions_ShouldReturnListOfQuestionDTO() {
