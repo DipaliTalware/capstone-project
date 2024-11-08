@@ -59,7 +59,7 @@ const QuestionAnswerPage: React.FC = () => {
 
   return (
     <div className="flex justify-center py-4">
-      <div className="bg-blue-500 text-white p-4">Test Tailwind CSS</div>{" "}
+      {" "}
       <div className="max-w-4xl w-full px-4">
         {" "}
         <h1 className="text-center text-2xl font-bold mb-6">

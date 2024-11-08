@@ -1,42 +1,24 @@
-import { useState, useEffect } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import QuestionAnswerPage from "./pages/QuestionAnswerPage";
-import NavBar from "./components/NavBar";
-import Signup from "./pages/Signup";
-// @ts-ignore
+import React from "react";
+import NavBar from "./components/NavBar.tsx";
+import Login from "./pages/Login.tsx";
+import QuestionAnswerPage from "./pages/QuestionAnswerPage.tsx";
+import HomePage from "./pages/HomePage.tsx";
 import "./styles/index.css";
+import { Routes, Route } from "react-router-dom";
+import Footer from "./components/Footer.tsx";
 
-function App() {
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const loggedUser = localStorage.getItem("user");
-    if (loggedUser) {
-      setUser(JSON.parse(loggedUser));
-    }
-  }, []);
-
+const App = () => {
   return (
     <>
       <NavBar />
       <Routes>
-        <Route
-          path="/questions"
-          element={user ? <QuestionAnswerPage /> : <Navigate to="/signup" />}
-        />
-        <Route
-          path="/signup"
-          element={!user ? <Signup /> : <Navigate to="/questions" />}
-        />
-        <Route
-          path="/"
-          element={
-            user ? <Navigate to="/questions" /> : <Navigate to="/signup" />
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/QuestionAnswerPage" element={<QuestionAnswerPage />} />
+        <Route path="/Login" element={<Login />} />
       </Routes>
+      <Footer />
     </>
   );
-}
+};
 
 export default App;

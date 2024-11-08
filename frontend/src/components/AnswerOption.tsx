@@ -17,6 +17,13 @@ const AnswerOption: React.FC<AnswerOptionProps> = ({
   hasSelected,
   isIncorrect,
 }) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Trigger the onSelect function on Enter or Space key press
+    if (e.key === "Enter" || e.key === " ") {
+      onSelect();
+    }
+  };
+
   return (
     <div
       className={`flex items-center space-x-2 cursor-pointer p-2 rounded-md ${
@@ -31,6 +38,9 @@ const AnswerOption: React.FC<AnswerOptionProps> = ({
             : ""
       }`}
       onClick={onSelect}
+      onKeyDown={handleKeyDown} // Handle keyboard interactions
+      tabIndex={0} // Make the div focusable
+      role="button" // Explicitly state this element is a button
     >
       <span className={`text-xl ${isSelected ? "text-blue-600" : ""}`}>
         {hasSelected && isCorrect
