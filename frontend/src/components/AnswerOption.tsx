@@ -1,6 +1,5 @@
 import React from "react";
 
-// Define the expected props for AnswerOption
 interface AnswerOptionProps {
   option: string;
   onSelect: () => void;
@@ -10,7 +9,6 @@ interface AnswerOptionProps {
   isIncorrect: boolean;
 }
 
-// Define the AnswerOption functional component
 const AnswerOption: React.FC<AnswerOptionProps> = ({
   option,
   onSelect,
@@ -26,9 +24,9 @@ const AnswerOption: React.FC<AnswerOptionProps> = ({
           ? "bg-blue-200"
           : hasSelected
             ? isCorrect
-              ? "bg-green-500 text-white" // Correct answer
+              ? "bg-green-500 text-white"
               : isIncorrect
-                ? "bg-red-500 text-white" // Incorrect answer
+                ? "bg-red-500 text-white"
                 : ""
             : ""
       }`}
