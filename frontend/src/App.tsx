@@ -1,15 +1,24 @@
-import './App.css'
-function App() {
+import React from "react";
+import NavBar from "./components/NavBar.tsx";
+import Login from "./pages/Login.tsx";
+import QuestionAnswerPage from "./pages/QuestionAnswerPage.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import "./styles/index.css";
+import { Routes, Route } from "react-router-dom";
+import Footer from "./components/Footer.tsx";
 
-
+const App = () => {
   return (
     <>
-<form>
-    <input className= "name" type= "text" placeholder="firstname"></input>
-    <input className= "name" type= "text" placeholder="lastname"></input>
-</form>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/QuestionAnswerPage" element={<QuestionAnswerPage />} />
+        <Route path="/Login" element={<Login />} />
+      </Routes>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
