@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:5176")
 @RequestMapping("/questions-answers")
 
 public class QuestionController {

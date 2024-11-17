@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Question } from "../interface/questionTypes.ts";
 import AnswerOption from "./AnswerOption";
 
@@ -27,7 +27,19 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({
   isCorrect,
   setIsCorrect,
 }) => {
-  const handleSelectAnswer = (option: string) => {
+  const [localIsCorrect, setLocalIsCorrect] = useState(
+    isCorrect[questionId] || false,
+  );
+
+  const handleSelectAnswer = (optionIndex: number) => {
+    let option = "";
+    if (0 == optionIndex) option = "A";
+    if (1 == optionIndex) option = "B";
+    if (2 == optionIndex) option = "C";
+    if (3 == optionIndex) option = "D";
+    if (4 == optionIndex) option = "E";
+    if (5 == optionIndex) option = "F";
+
     setSelectedAnswers((prev) => {
       const newSelection = prev[questionId] || [];
       if (newSelection.includes(option)) {
@@ -44,7 +56,6 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({
   const handleSubmit = () => {
     const correctAnswers = question.correctAnswer.split(",");
     const selected = selectedAnswers[questionId] || [];
-
     // Check if the selected answers match the correct answers
     const isCorrectSelection =
       selected.length === correctAnswers.length &&
@@ -52,6 +63,15 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({
 
     setAnswered((prev) => ({ ...prev, [questionId]: true }));
     setIsCorrect((prev) => ({ ...prev, [questionId]: isCorrectSelection }));
+    setLocalIsCorrect(isCorrectSelection);
+
+    // Set the selected state for correct answers
+    if (isCorrectSelection) {
+      setSelectedAnswers((prev) => ({
+        ...prev,
+        [questionId]: correctAnswers,
+      }));
+    }
   };
 
   return (
@@ -59,23 +79,16 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({
       <h3 className="text-xl font-semibold mb-4">{question.text}</h3>
       <div className="space-y-3">
         {question.options.map((option, index) => {
-          const isSelected = selectedAnswers[questionId]?.includes(option);
-          const isCorrectAnswer = question.correctAnswer
-            .split(",")
-            .includes(option);
-          const hasSelected = answered[questionId] && isSelected;
-          const isAnswerIncorrect =
-            answered[questionId] && !isSelected && !isCorrectAnswer;
-
           return (
             <AnswerOption
               key={index}
               option={option}
-              onSelect={() => handleSelectAnswer(option)}
-              isSelected={isSelected}
-              isCorrect={isCorrectAnswer}
-              hasSelected={hasSelected}
-              isIncorrect={isAnswerIncorrect}
+              onSelect={() => handleSelectAnswer(index)}
+              isCorrect={localIsCorrect}
+              maxSelections={1}
+              isSelected={
+                selectedAnswers[questionId]?.includes(option) || false
+              }
             />
           );
         })}
@@ -95,8 +108,7 @@ const QuestionComponent: React.FC<QuestionComponentProps> = ({
         >
           {isCorrect[questionId]
             ? "Correct Answer!"
-            : `The correct answer 
-            : ${question.correctAnswer}`}
+            : `The correct answer: ${question.correctAnswer}`}
         </div>
       )}
     </div>

@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 interface AnswerOptionProps {
   option: string;
-  onSelect: () => void;
-  isSelected: boolean;
+  onSelect: (isSelected: boolean) => void;
   isCorrect: boolean;
-  hasSelected: boolean;
-  isIncorrect: boolean;
+  maxSelections: number;
+  isSelected: boolean;
 }
 
 const AnswerOption: React.FC<AnswerOptionProps> = ({
   option,
   onSelect,
-  isSelected,
   isCorrect,
-  hasSelected,
-  isIncorrect,
+  maxSelections,
+  isSelected: initialIsSelected,
 }) => {
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    // Trigger the onSelect function on Enter or Space key press
-    if (e.key === "Enter" || e.key === " ") {
-      onSelect();
+  const [isSelected, setIsSelected] = useState(initialIsSelected);
+
+  useEffect(() => {
+    setIsSelected(initialIsSelected);
+  }, [initialIsSelected]);
+
+  const handleClick = () => {
+    if (maxSelections === 1) {
+      setIsSelected(!isSelected);
+      onSelect(!isSelected);
+    } else {
+      setIsSelected(!isSelected);
+      onSelect(!isSelected);
     }
   };
 
@@ -28,26 +35,22 @@ const AnswerOption: React.FC<AnswerOptionProps> = ({
     <div
       className={`flex items-center space-x-2 cursor-pointer p-2 rounded-md ${
         isSelected
-          ? "bg-blue-200"
-          : hasSelected
-            ? isCorrect
-              ? "bg-green-500 text-white"
-              : isIncorrect
-                ? "bg-red-500 text-white"
-                : ""
-            : ""
+          ? isCorrect
+            ? "bg-green-500 text-white"
+            : "bg-blue-200"
+          : ""
       }`}
-      onClick={onSelect}
-      onKeyDown={handleKeyDown} // Handle keyboard interactions
-      tabIndex={0} // Make the div focusable
-      role="button" // Explicitly state this element is a button
+      onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleClick();
+        }
+      }}
+      tabIndex={0}
+      role="button"
     >
       <span className={`text-xl ${isSelected ? "text-blue-600" : ""}`}>
-        {hasSelected && isCorrect
-          ? "✔"
-          : hasSelected && isIncorrect
-            ? "✘"
-            : ""}
+        {isCorrect && isSelected ? "✔" : ""}
       </span>
       <span>{option}</span>
     </div>

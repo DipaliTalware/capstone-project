@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// @ts-ignore
 import github from "../assets/github.png";
 
 const FooterButtonsDarkExample: React.FC = () => {
