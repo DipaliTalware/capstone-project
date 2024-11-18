@@ -27,6 +27,8 @@ const certifications = [
   },
 ];
 
+const exams = [{ name: "AWS Cloud Practitioner", href: "/practiceExam" }];
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -88,6 +90,23 @@ export default function NavBar() {
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           {cert.name}
+                        </Link>
+                      </MenuItem>
+                    ))}
+                  </MenuItems>
+                </Menu>
+                <Menu as="div" className="relative">
+                  <MenuButton className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                    Practice Exams
+                  </MenuButton>
+                  <MenuItems className="absolute left-0 mt-2 w-48 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                    {exams.map((exam) => (
+                      <MenuItem key={exam.name}>
+                        <Link
+                          to={exam.href}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          {exam.name}
                         </Link>
                       </MenuItem>
                     ))}
