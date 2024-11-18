@@ -12,7 +12,6 @@ const AnswerOption: React.FC<AnswerOptionProps> = ({
   option,
   onSelect,
   isCorrect,
-  maxSelections,
   isSelected: initialIsSelected,
 }) => {
   const [isSelected, setIsSelected] = useState(initialIsSelected);
@@ -22,13 +21,9 @@ const AnswerOption: React.FC<AnswerOptionProps> = ({
   }, [initialIsSelected]);
 
   const handleClick = () => {
-    if (maxSelections === 1) {
-      setIsSelected(!isSelected);
-      onSelect(!isSelected);
-    } else {
-      setIsSelected(!isSelected);
-      onSelect(!isSelected);
-    }
+    const newIsSelected = !isSelected;
+    setIsSelected(newIsSelected);
+    onSelect(newIsSelected);
   };
 
   return (
