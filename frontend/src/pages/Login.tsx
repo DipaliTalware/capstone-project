@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from "react";
+// @ts-ignore
 import login from "../assets/signup.jpg"; // Your login image path
 
 const Login: React.FC = () => {
