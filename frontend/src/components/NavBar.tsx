@@ -9,11 +9,14 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+// @ts-ignore
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const navigation = [
   { name: "Home", href: "/", current: true },
-  { name: "Exams", href: "/exams", current: false },
-  { name: "Courses", href: "/courses", current: false },
   { name: "Contact", href: "/contact", current: false },
 ];
 
@@ -28,10 +31,6 @@ const certifications = [
 ];
 
 const exams = [{ name: "AWS Cloud Practitioner", href: "/practiceExam" }];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function NavBar() {
   return (
@@ -63,21 +62,17 @@ export default function NavBar() {
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    aria-current={item.current ? "page" : undefined}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "rounded-md px-3 py-2 text-sm font-medium",
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                {/* Home */}
+                <Link
+                  key="Home"
+                  to="/"
+                  aria-current="page"
+                  className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  Home
+                </Link>
+
+                {/* Q&A Menu */}
                 <Menu as="div" className="relative">
                   <MenuButton className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                     Q&A
@@ -95,6 +90,8 @@ export default function NavBar() {
                     ))}
                   </MenuItems>
                 </Menu>
+
+                {/* Practice Exams Menu */}
                 <Menu as="div" className="relative">
                   <MenuButton className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                     Practice Exams
@@ -112,6 +109,15 @@ export default function NavBar() {
                     ))}
                   </MenuItems>
                 </Menu>
+
+                {/* Contact */}
+                <Link
+                  key="Contact"
+                  to="/contact"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  Contact
+                </Link>
               </div>
             </div>
           </div>
@@ -140,7 +146,6 @@ export default function NavBar() {
                     Your Profile
                   </Link>
                 </MenuItem>
-
                 <MenuItem>
                   <Link
                     to="/Login"
