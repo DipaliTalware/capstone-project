@@ -6,6 +6,8 @@ import HomePage from "./pages/HomePage.tsx";
 import "./styles/index.css";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer.tsx";
+import Exams from "./components/Exams.tsx";
+import Contact from "./pages/Contact.tsx";
 
 const App = () => {
   return (
@@ -13,8 +15,10 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/practiceExam" element={<Exams />} />
         <Route path="/QuestionAnswerPage" element={<QuestionAnswerPage />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </>
