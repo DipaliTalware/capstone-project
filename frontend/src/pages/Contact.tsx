@@ -31,7 +31,7 @@ const Contact: React.FC = () => {
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Invalid email address.";
     }
 
@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="mt-20+ ">
+    <div className="mt-20">
       <form
         onSubmit={handleSubmit}
         className="max-w-md mx-auto bg-white p-6 shadow-md rounded-md"
