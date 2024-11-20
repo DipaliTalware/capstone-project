@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer.tsx";
 import Exams from "./components/Exams.tsx";
 import Contact from "./pages/Contact.tsx";
+import Signup from "./pages/Signup.tsx";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/QuestionAnswerPage" element={<QuestionAnswerPage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
       <Footer />
     </>

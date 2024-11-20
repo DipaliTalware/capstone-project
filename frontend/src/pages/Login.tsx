@@ -1,15 +1,52 @@
 import React, { useState, FormEvent } from "react";
+import axios from "axios";
+
 // @ts-ignore
-import login from "../assets/signup.jpg"; // Your login image path
+import login from "../assets/login.png";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
+
+    const loginData = {
+      email: username, // Assuming you are using email as the username
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/login",
+        loginData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      const token = response.data.accessToken; // Assuming the backend returns token in the `accessToken` field
+
+      console.log("Login successful, token saved:", token);
+
+      // Store the token in localStorage for future requests
+      localStorage.setItem("jwtToken", token);
+
+      // Optional: Redirect to a protected route/dashboard after successful login
+      window.location.href = "/"; // Example of redirecting to the dashboard
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        // Handle API-specific error (e.g., invalid credentials)
+        setError(error.response.data.message || "Invalid credentials");
+      } else {
+        // Handle other errors (network error, etc.)
+        setError("An error occurred. Please try again.");
+      }
+      console.log("Login failed:", error);
+    }
   };
 
   return (
@@ -18,13 +55,16 @@ const Login: React.FC = () => {
         <div className="w-full md:w-1/2 p-8">
           <div className="max-w-sm mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8 mt-8">Login</h2>
+            {error && (
+              <div className="text-red-500 text-center mb-4">{error}</div>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="mb-8">
                 <label
                   htmlFor="username"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Username
+                  Username (Email)
                 </label>
                 <input
                   type="text"
