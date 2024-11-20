@@ -9,6 +9,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+
 // @ts-ignore
 
 function classNames(...classes) {
@@ -152,6 +153,14 @@ export default function NavBar() {
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                   >
                     Login
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link
+                    to="/signup"
+                    className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                  >
+                    Signup
                   </Link>
                 </MenuItem>
               </MenuItems>
