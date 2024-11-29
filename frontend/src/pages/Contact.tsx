@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="mt-20">
+    <div className="mt-20 h-screen">
       <form
         onSubmit={handleSubmit}
         className="max-w-md mx-auto bg-white p-6 shadow-md rounded-md"

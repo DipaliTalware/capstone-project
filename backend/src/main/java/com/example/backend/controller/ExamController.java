@@ -24,4 +24,10 @@ public class ExamController {
         examService.saveAllQuestions(questions);
         return ResponseEntity.ok("Questions added successfully");
     }
+
+    @GetMapping("/questions")
+    public ResponseEntity<List<ExamQuestion>> getAllQuestions() {
+        List<ExamQuestion> questions = examService.getAllQuestions();
+        return ResponseEntity.ok(questions);
+    }
 }

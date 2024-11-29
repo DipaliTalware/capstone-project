@@ -13,6 +13,15 @@ public class ExamQuestion {
     private List<String> options;
     private List<String> correctAnswers;
 
+    public ExamQuestion(String id, String question, List<String> options, List<String> correctAnswers) {
+        this.id = id;
+        this.question = question;
+        this.options = options;
+        this.correctAnswers = correctAnswers;
+    }
+
+    public ExamQuestion(){}
+
     // Getters and setters
     public String getId() {
         return id;
