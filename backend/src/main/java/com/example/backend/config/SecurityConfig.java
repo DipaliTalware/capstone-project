@@ -31,7 +31,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/login", "/auth/signup", "/questions-answers").permitAll()
+                        .requestMatchers("/auth/login", "/auth/signup", "/questions-answers", "/exam/questions").permitAll()
                         .anyRequest().authenticated()
                 );
 
